@@ -1,0 +1,50 @@
+In JavaScript, there are two types of task queues for managing asynchronous code execution: the callback queue (also known as the message queue) and the microtask queue. The microtask queue is used to handle smaller, higher-priority tasks compared to the callback queue. Microtasks are typically executed before the callback queue.
+
+Here's an overview of the microtask queue and how it works:
+
+1. **Microtasks vs. Callbacks:**
+   - Microtasks are tasks with higher priority compared to regular callbacks (also known as macrotasks).
+   - Regular callbacks include tasks like timers (e.g., `setTimeout`), I/O operations, DOM events, and user interactions.
+   - Microtasks include tasks like promises, `async/await`, and mutation observers.
+
+2. **Order of Execution:**
+   - Microtasks are executed before regular callbacks from the callback queue.
+   - When a microtask is added to the microtask queue, it is processed immediately if the JavaScript execution stack is empty.
+
+3. **Promises and Microtasks:**
+   - Promises play a significant role in populating the microtask queue.
+   - When a promise is resolved or rejected, its attached callbacks (via `.then()` or `.catch()`) are added to the microtask queue.
+
+Here's an example demonstrating the execution order of microtasks and callbacks:
+
+```javascript
+console.log("Start");
+
+setTimeout(() => {
+  console.log("Callback 1");
+}, 0);
+
+Promise.resolve().then(() => {
+  console.log("Microtask 1");
+});
+
+Promise.resolve().then(() => {
+  console.log("Microtask 2");
+});
+
+setTimeout(() => {
+  console.log("Callback 2");
+}, 0);
+
+console.log("End");
+```
+
+In this example, you will see the following order of execution:
+
+1. "Start" is logged to the console.
+2. Two promises (`Microtask 1` and `Microtask 2`) are added to the microtask queue.
+3. "End" is logged to the console.
+4. Two callbacks (`Callback 1` and `Callback 2`) are added to the callback queue.
+5. The microtasks are executed before the callbacks, so `Microtask 1` and `Microtask 2` are logged before `Callback 1` and `Callback 2`.
+
+.

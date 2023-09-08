@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #parent {
+            width: 45rem;
+            height: 25rem;
+            background-color: antiquewhite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #child {
+            width: 35rem;
+            height: 15rem;
+            background-color: rgb(127, 168, 70);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #subChild {
+            width: 25rem;
+            height: 5rem;
+            background-color: rgb(87, 73, 206);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="parent">
+        <div id="child">
+            <div id="subChild">Click Me</div>
+        </div>
+    </div>
+</body>
+<script>
+    function divOne(e) {
+        this.style.background = "pink"
+    }
+    function divTwo(e) {
+        this.style.background = "yellow"
+        console.log("Clicked")
+    }
+    function divThree(e) {
+        this.style.background = "pink"
+    }
+    var divOne = document.getElementById("parent")
+    var divTwo = document.getElementById("child")
+    var divThree = document.getElementById("subChild ")
+    divOne.addEventListener('click', divOne, true)
+    divTwo.addEventListener('click', divTwo, true)
+    divThree.addEventListener('click', divThree, true)
+</script>
+
+</html>
